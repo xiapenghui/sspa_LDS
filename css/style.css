@@ -1,0 +1,368 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+ul,
+ol {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+	color: #000;
+}
+
+img {
+	border: 0;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+body,
+html,
+#app {
+	width: 100vw;
+	height: 100vh;
+	color: #FFFFFF;
+	overflow: hidden;
+}
+
+#content {
+	position: relative;
+	background-color: #000;
+}
+
+.header {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 6.5vh;
+	line-height: 6.5vh;
+	color: #37CC48;
+	font-size: 2rem;
+	font-weight: bold;
+	letter-spacing: .1rem;
+	z-index: 9;
+
+}
+
+.header .logoTitle {
+	position: absolute;
+	top: 0;
+	left: 15%;
+}
+
+.header .logoImg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: auto;
+	height: 6.5vh;
+
+}
+
+.header .line {
+	position: absolute;
+	top: 6.3vh;
+	left: 0;
+	width: 100%;
+	height: 2px;
+	background-image: url(../image/kb_top_logo_line1.png);
+	background-position: center;
+	background-size: contain;
+}
+
+.header .time {
+	position: absolute;
+	top: -1vh;
+	right: 1vh;
+	font-size: 15px;
+	font-weight: bold;
+	letter-spacing: 0
+}
+
+#content .leftBox,
+#content .centerBox .fourBigBox .fourBox,
+#content .centerBox .fiveBox,
+#content .rightBox .threeBox{
+	background-image: url(../image/bg.png);
+	background-repeat: no-repeat;
+	background-size: 100% 102%;
+	background-position: center;
+}
+
+#content .leftBox {
+	position: absolute;
+	top: 8vh;
+	left: 0.5%;
+	width: 32%;
+	height: 90vh;
+}
+
+#content .leftBox .search {
+	position: relative;
+	width: 100%;
+	height: 6vh;
+	padding-top: 2vh;
+}
+
+
+#content .centerBox {
+	position: absolute;
+	top: 8vh;
+	left: 33.3%;
+	width: 33%;
+	height: 90vh;
+}
+
+#content .centerBox .fourBigBox {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+#content .centerBox .fourBigBox .fourBox {
+	width: 49%;
+	height: 28.5vh;
+	margin-bottom: 1.5vh;
+}
+
+#content .centerBox .fiveBox {
+	width: 100%;
+	height: 30vh;
+}
+
+#content .rightBox {
+	position: absolute;
+	top: 8vh;
+	right: 1%;
+	width: 32%;
+	height: 90vh;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+
+#content .rightBox .threeBox {
+	width: 100%;
+	height: 28.5vh;
+	margin-bottom: 1.5vh;
+}
+#content .rightBox .threeBox:last-child {
+	height: 30vh;
+}
+
+
+.mycharts {
+	width: 100%;
+	height: 100%;
+}
+
+.border {
+	padding: 4px;
+	border-style: solid;
+	border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.row1 {
+	position: absolute;
+	border-width: 3px 0 0 2px;
+	top: -1px;
+	left: -1px;
+	border-radius: 5px 0 0 0;
+}
+
+.row2 {
+	position: absolute;
+	border-width: 3px 2px 0 0;
+	top: -2px;
+	right: -2px;
+	border-radius: 0 5px 0 0;
+}
+
+.col1 {
+	position: absolute;
+	border-width: 0 0 3px 2px;
+	bottom: -2px;
+	left: -2px;
+	border-radius: 0 0 0 5px;
+}
+
+.col2 {
+	position: absolute;
+	border-width: 0 2px 3px 0;
+	bottom: -2px;
+	right: -2px;
+	border-radius: 0 0 5px 0;
+}
+
+
+
+.oneLeft {
+	margin-top: 2vh;
+}
+
+.oneLeft .swiperTitle,
+.oneLeft .swiperData {
+	width: 100%;
+	text-align: center;
+}
+
+.oneLeft .swiperTitle {
+	height: 5.5vh;
+	line-height: 5.5vh;
+	font-size: 1.1rem;
+	font-weight: bold;
+	background-color: #37CC48;
+	border-bottom: 1px solid #fff;
+
+}
+
+.oneLeft .swiperData {
+	height: 76vh;
+	overflow: hidden;
+}
+
+.oneLeft .swiperData {
+	overflow: hidden;
+}
+
+.oneLeft .swiperData li {
+	line-height: 6vh;
+	font-size: 13px;
+	border-bottom: 0.5px solid #FFFFFF;
+}
+
+.mo8 {
+	width: 8%;
+	display: inline-block;
+	text-align: center;
+}
+
+.mo10 {
+	width: 10%;
+	display: inline-block;
+	text-align: center;
+}
+
+.mo15 {
+	width: 15%;
+	display: inline-block;
+	text-align: center;
+}
+
+.mo20 {
+	width: 20%;
+	display: inline-block;
+	text-align: center;
+}
+
+.mo25 {
+	width: 25%;
+	display: inline-block;
+	text-align: center;
+}
+
+.mo30 {
+	width: 30%;
+	display: inline-block;
+	text-align: center;
+}
+
+.mo35 {
+	width: 35%;
+	display: inline-block;
+	text-align: center;
+}
+
+.mo40 {
+	width: 40%;
+	display: inline-block;
+	text-align: center;
+}
+
+.red {
+	padding: 3%;
+	background-color: red;
+	border-radius: 50%;
+}
+
+
+
+
+
+#app .demo /deep/ .el-table,
+#app .demo /deep/ .el-table__expanded-cell {
+	background-color: transparent;
+}
+
+#app .demo /deep/ .el-table th {
+	background-color: transparent !important;
+	border-bottom: 0.5px solid #37CC48;
+	color: #FFFFFF;
+}
+
+#app .demo /deep/ .el-table tr,
+#app .demo /deep/ .el-table tr td {
+	color: #FFFFFF;
+	background-color: transparent !important;
+	border-bottom: 0.5px solid #37CC48;
+}
+
+#app .demo /deep/ .el-table::before {
+	background-color: transparent;
+}
+
+.rightTable /deep/ .el-table td,
+.rightTable /deep/ .el-table th {
+	/* padding: 24px 0px; */
+}
+
+.rightTable .el-table .el-table__body {
+	width: auto !important;
+}
+
+.el-table td,
+.el-table th {
+	padding: 10.5px 0 !important;
+}
+
+.el-table thead {
+	background-color: #37CC48;
+}
+
+#app .demo .el-table tbody tr:hover>td,
+#app .swiperData li:hover {
+	background-color: #37CC48 !important
+}
+
+.el-progress .el-progress__text {
+	color: #ffffff;
+}
+
+.el-input--suffix .el-input__inner {
+	background-color: transparent;
+	border: 2px solid #37CC48;
+	color: #FFFFFF;
+	font-size: 1rem;
+	font-weight: bold;
+}
+
+
+
+.el-button--success {
+	background-image: linear-gradient(to right, #37CC48, #37CC48) !important;
+	border-color: 1px solid #37CC48 !important;
+}
+
+
+.el-date-table td span {
+	color: #000;
+}
