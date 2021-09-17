@@ -30,7 +30,7 @@
 				<div class="search">
 					<el-row :gutter="20" type="flex" class="row-bg" justify="center">
 						<el-col :span="7">
-							<el-date-picker v-model="newDate" type="date" placeholder="请选择日期"    @change="changeData" :picker-options="pickerOptions0"
+							<el-date-picker v-model="newDate" type="date" placeholder="请选择日期" @change="changeData" :picker-options="pickerOptions0"
 							 style="width: 100%;">
 							</el-date-picker>
 						</el-col>
@@ -40,7 +40,7 @@
 							</el-select>
 						</el-col>
 						<el-col :span="6">
-							<el-select v-model="newLine" placeholder="请选择线体" @change="changeLine" clearable >
+							<el-select v-model="newLine" placeholder="请选择线体" @change="changeLine" clearable>
 								<el-option v-for="item in optionsLine" :key="item.value" :label="item.label" :value="item.value"></el-option>
 							</el-select>
 						</el-col>
@@ -66,7 +66,7 @@
 								</span>
 								<span class="mo35">
 									<el-tag type="danger" effect="dark" v-if='item.ke<item.targetke'> {{(item.ke) + '%'}}</el-tag>
-									<b v-else>{{(item.ke)+ '%'}} </b> 
+									<b v-else>{{(item.ke)+ '%'}} </b>
 								</span>
 							</li>
 						</vue-seamless-scroll>
@@ -143,9 +143,7 @@
 					<span class="border col2"></span>
 				</div>
 			</div>
-
 		</div>
-
 	</body>
 
 
@@ -174,8 +172,8 @@
 			tableDataMo: [],
 			tableData: [],
 			dataOneBar: {
-				// dataOneBarX: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
 				dataOneBarX: [],
+				years:'',
 				dataOneBar1: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
 				dataOneBar2: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
 				dataOneBar3: [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2],
@@ -189,11 +187,11 @@
 
 			dataOnePie: [{
 					value: 0,
-					name: '正式工'
+					name: 'Temp.正式工'
 				},
 				{
 					value: 0,
-					name: '小时工'
+					name: 'Perm.小时工'
 				},
 			],
 			dataTwoPie: [{
@@ -254,18 +252,17 @@
 				'Useful Time', 'Cyclic + Frequentia', 'Design Time', 'Operator Activeity', ' DVC Externalto process',
 				'Non Quality', 'Uncertaines', 'Operationg Time', 'DVC support', 'Time Spent'
 			],
-			IeDataY: [10, 23000, 10, 35000, 37000, 38000, 39000,2000, 37000, 2000],
+			IeDataY: [10, 23000, 10, 35000, 37000, 38000, 39000, 2000, 37000, 2000],
 			IeDataY2: [15, 25, 40, 40, 26, 30, 20, 26, 30, 20],
-			IeDataProKe:0,
-			IeDataProIe:0,
-			IeDataProKs:0,
-			IeDataProKd:0,
+			IeDataProKe: 0,
+			IeDataProIe: 0,
+			IeDataProKs: 0,
+			IeDataProKd: 0,
 			KeDataX: ['岗位培训', 'SIM1', '5S、交接班', 'Operator Activity', 'TPM1设备保养',
 				'过程返工', '维修', '等待物料', '换型', '附加控制', 'MES系统维护'
 			],
 			KeDataPar: [20, 50, 80, 30, 53, 56, 75, 86, 43, 35, 78],
 			KeDataParLine: [10, 20, 30, 40, 53, 36, 72, 26, 33, 32, 28],
-
 		},
 		computed: {
 			optionHoverOther() {
@@ -359,7 +356,8 @@
 							//表格
 							self.tableData = res.data.list.T1.length == 0 ? [] : res.data.list.T1;
 							//人数统计
-							self.peopleData = res.data.list.T2T3.length ==0 ? [ ] : Object.values(Array.from(res.data.list.T2T3)[0]).slice(0, 3);
+							self.peopleData = res.data.list.T2T3.length == 0 ? [] : Object.values(Array.from(res.data.list.T2T3)[0]).slice(
+								0, 3);
 							// //小时工和正式工
 							self.dataOnePie[0].value = Object.values(Array.from(res.data.list.T2T3)[0]).slice(3, 4);
 							self.dataOnePie[1].value = Object.values(Array.from(res.data.list.T2T3)[0]).slice(4, 5);
@@ -390,9 +388,10 @@
 								return init
 							}, [])
 							self.KsData = T4data
-  
+
 							//IE时间分布
-							self.IeDataY2 = res.data.list.T7.length == 0 ? [] : (Object.values(Array.from(res.data.list.T7)[0])).map(item => parseInt(item)).slice(2, 12);
+							self.IeDataY2 = res.data.list.T7.length == 0 ? [] : (Object.values(Array.from(res.data.list.T7)[0])).map(
+								item => parseInt(item)).slice(2, 12);
 							self.IeDataProKs = res.data.list.T7.length == 0 ? 0 : res.data.list.T7[0].ks;
 							self.IeDataProKe = res.data.list.T7.length == 0 ? 0 : res.data.list.T7[0].ke;
 							self.IeDataProIe = res.data.list.T7.length == 0 ? 0 : res.data.list.T7[0].ie;
@@ -421,7 +420,7 @@
 								T9data2.push(item.ie)
 								T9data3.push(item.targetke)
 								T9data4.push(item.targetie)
-								
+
 							});
 							console.log('T9data3', T9data3)
 							self.dataOneBar.dataOneBarX = T9dataX
@@ -429,7 +428,8 @@
 							self.dataOneBar.dataOneBar2 = T9data2
 							self.dataOneBar.dataOneBar3 = T9data3
 							self.dataOneBar.dataOneBar4 = T9data4
-
+							self.dataOneBar.years = res.data.list.T9[0].year
+                            
 
 							self.myChart1()
 							self.myChart2()
@@ -487,7 +487,7 @@
 				option = {
 
 					title: [{
-							text: '人数统计',
+							text: 'DVC Attendance 出勤状况',
 							left: 'center',
 							y: '2', //垂
 							textStyle: { //主标题文本样式
@@ -765,7 +765,7 @@
 				// 指定图表的配置项和数据
 				var option = {
 					title: {
-						text: '主线OUTPUT',
+						text: 'FG Output 成品产出',
 						left: 'center',
 						y: '2', //垂
 						textStyle: { //主标题文本样式
@@ -804,7 +804,7 @@
 						axisLabel: {
 							show: true,
 							textStyle: {
-								fontSize:14,
+								fontSize: 14,
 								color: '#fff',
 								fontFamily: 'cursive',
 							},
@@ -886,16 +886,27 @@
 				var myChart3 = echarts.init(document.getElementById('myChart3'));
 				// 指定图表的配置项和数据
 				var option = {
-					title: {
-						text: '小时工和正式工出勤小时比',
-						left: 'center',
-						y: '2', //垂
-						textStyle: { //主标题文本样式
-							fontSize: 20,
-							color: '#37CC48',
-							fontFamily: 'cursive',
+					title: [{
+							text: `Temp/Perm`,
+							left: 'center',
+							y: '2', //垂
+							textStyle: { //主标题文本样式
+								fontSize: 20,
+								color: '#37CC48',
+								fontFamily: 'cursive',
+							}
+						},
+						{
+							text: 'Ratio 小时工/正式工占比',
+							left: 'center',
+							y: '30', //垂
+							textStyle: { //主标题文本样式
+								fontSize: 20,
+								color: '#37CC48',
+								fontFamily: 'cursive',
+							},
 						}
-					},
+					],
 					color: ['#00aa00', '#CBCFD4'],
 					tooltip: {
 						trigger: 'item',
@@ -903,7 +914,7 @@
 					},
 					legend: {
 						left: 'center',
-						y: '35px',
+						y: '70',
 						textStyle: { //图例文字的样式
 							color: '#fff',
 							fontSize: 15,
@@ -911,25 +922,25 @@
 						},
 						itemWidth: 13, // 设置宽度
 						itemHeight: 13, // 设置高度
-						itemGap: 10 // 设置间距
+						itemGap: 20 // 设置间距
 					},
 
 					series: [{
 						name: '所占比例',
 						type: 'pie',
 						radius: '35%',
-						center: ["50%", "60%"],
+						center: ["50%", "65%"],
 						data: this.dataOnePie,
-						 label:{            //饼图图形上的文本标签
-						normal:{
-							show:true,
-							// position:'inner', //标签的位置
-							textStyle : {
-								fontSize : 13,    //文字的字体大小
-								fontFamily: 'cursive',
-							},
-							  formatter: '{b}:{c}(H)' + '\n' + ' ({d}%)',
-							}   
+						label: { //饼图图形上的文本标签
+							normal: {
+								show: true,
+								// position:'inner', //标签的位置
+								textStyle: {
+									fontSize: 13, //文字的字体大小
+									fontFamily: 'cursive',
+								},
+								formatter: '{b}:{c}(H)' + '\n' + ' ({d}%)',
+							}
 						}
 					}]
 				};
@@ -947,7 +958,7 @@
 				// 指定图表的配置项和数据
 				var option = {
 					title: {
-						text: 'T1-T5比例图',
+						text: 'T1-T5 Distribution 时间分布',
 						left: 'center',
 						y: '2', //垂
 						textStyle: { //主标题文本样式
@@ -956,7 +967,7 @@
 							color: "#37CC48"
 						}
 					},
-					color: ['#00aa00', 'red', '#ffff66', '#ff5500', '#55ffff','#0055ff'],
+					color: ['#00aa00', 'red', '#ffff66', '#ff5500', '#55ffff', '#0055ff'],
 					tooltip: {
 						trigger: 'item',
 						formatter: "{a} <br/>{b} : {c}(H) ({d}%)"
@@ -983,15 +994,15 @@
 							borderRadius: 8,
 						},
 						data: this.dataTwoPie,
-						label:{            //饼图图形上的文本标签
-						normal:{
-							show:true,
-							// position:'inner', //标签的位置
-							textStyle : {
-								fontSize : 13,    //文字的字体大小
-								fontFamily: 'cursive',
-							},
-							  formatter: '{b}:{c}(H)' + '\n' + ' ({d}%)',
+						label: { //饼图图形上的文本标签
+							normal: {
+								show: true,
+								// position:'left', //标签的位置
+								textStyle: {
+									fontSize: 13, //文字的字体大小
+									fontFamily: 'cursive',
+								},
+								formatter: '{b}:{c}(H)' + '\n' + ' ({d}%)',
 							},
 						},
 					}]
@@ -1003,203 +1014,204 @@
 				}
 			},
 
-		    //ks时间分布图
-		   myChart5() {
-		 	var myChart5 = echarts.init(document.getElementById('myChart5'));
-		 	var category = this.KsData // 类别
-		 	var total = 100; // 数据总数
-		 	var datas = [];
-		 	category.forEach(value => {
-		 		datas.push(value.value);
-		 	});
-		 	option = {
-		 		title: {
-		 			text: 'KS distribution by item (Hrs)/KS时间分布图',
-		 			left: 'center',
-		 			y: '2', //垂
-		 			textStyle: { //主标题文本样式
-		 				fontSize: 20,
-		 				fontFamily: 'cursive',
-		 				color: "#37CC48"
-		 			}
-		 		},
-		 		xAxis: {
-		 			max: total,
-		 			splitLine: {
-		 				show: false
-		 			},
-		 			axisLine: {
-		 				show: false
-		 			},
-		 			axisLabel: {
-		 				show: false
-		 			},
-		 			axisTick: {
-		 				show: false
-		 			},
-		 		},
-		 		grid: {
-		 			left: '25%',
-		 			right: '15%',
-		 			top: '15%',
-		 			bottom: '0%',
-		 		},
-		 		yAxis: [{
-		 			type: "category",
-		 			inverse: false,
-		 			data: category,
-		 			axisLine: {
-		 				show: false
-		 			},
-		 			axisTick: {
-		 				show: false
-		 			},
-		 			axisLabel: {
-		 				show: false
-		 			},
-		 
-		 
-		 		}],
-		 		series: [{
-		 				// 内
-		 				type: "bar",
-		 				barWidth: 12,
-		 				silent: true,
-		 				itemStyle: {
-		 					normal: {
-		 						color: {
-		 							colorStops: [{
-		 									offset: 0,
-		 									color: '#00aa00', // 0% 处的颜色
-		 								},
-		 								{
-		 									offset: 1,
-		 									color: 'red', // 100% 处的颜色
-		 								},
-		 							],
-		 						},
-		 
-		 					},
-		 				},
-		 				label: {
-		 					normal: {
-		 						formatter: "{b}",
-		 						textStyle: {
-		 							color: "#fff",
-		 							fontSize: 15,
-		 							fontFamily: 'cursive',
-		 						},
-		 						position: 'left',
-		 						distance: 12, // 向右偏移位置
-		 						show: true
-		 					}
-		 				},
-		 				data: category,
-		 				z: 1,
-		 				animationEasing: "elasticOut"
-		 			},
-		 
-		 			{
-		 				// 分隔
-		 				type: "pictorialBar",
-		 				itemStyle: {
-		 					normal: {
-		 						color: "#07314a"
-		 					}
-		 				},
-		 				symbolRepeat: "fixed",
-		 				symbolMargin: 1.5,
-		 				symbol: "rect",
-		 				symbolClip: true,
-		 				symbolSize: [5, 15],
-		 				symbolPosition: "start",
-		 				symbolOffset: [3, -3],
-		 				symbolBoundingData: this.total,
-		 				data: [total, total, total, total, total, total, total],
-		 				z: 2,
-		 				animationEasing: "elasticOut",
-		 
-		 
-		 			},
-		 			{
-		 				// label
-		 				type: "pictorialBar",
-		 				symbolBoundingData: total,
-		 				itemStyle: {
-		 					normal: {
-		 						color: "none"
-		 					}
-		 				},
-		 				label: {
-		 					normal: {
-		 						formatter: (params) => {
-		 							var text;
-		 							text = '{f| ' + (params.data * 100 / total) + '%}';
-		 							return text;
-		 						},
-		 						rich: {
-		 							f: {
-		 								color: "#ffffff"
-		 							}
-		 						},
-		 						position: 'right',
-		 						distance: 20, // 向右偏移位置
-		 						show: true
-		 					}
-		 				},
-		 				data: datas,
-		 				z: 0,
-		 
-		 			},
-		 
-		 			{
-		 				name: "外框",
-		 				type: "bar",
-		 				barGap: "-130%", // 设置外框粗细
-		 				data: [total, total, total, total, total, total, total],
-		 				barWidth: 20,
-		 				itemStyle: {
-		 					normal: {
-		 						barBorderRadius: [5, 5, 5, 5, 5, 5, 5],
-		 						color: "transparent", // 填充色
-		 						barBorderColor: "#00aa00", // 边框色
-		 						barBorderWidth: 1, // 边框宽度
-		 					}
-		 				},
-		 				z: 0
-		 			},
-		 			{
-		 				type: 'scatter',
-		 				name: '条形',
-		 				symbol: 'roundRect',
-		 				symbolSize: [5, 10],
-		 				symbolOffset: [5, -3],
-		 				symbolKeepAspect: true,
-		 				itemStyle: {
-		 					normal: {
-		 						color: "#00aa00"
-		 					}
-		 				},
-		 				data: [total, total, total, total, total, total, total],
-		 			}
-		 
-		 		]
-		 	}
-		 
-		 	// 使用刚指定的配置项和数据显示图表。
-		 	myChart5.setOption(option);
-		 	window.onresize = function() {
-		 		myChart5.resize();
-		 	}
-		 },
+			//ks时间分布图
+			myChart5() {
+				var myChart5 = echarts.init(document.getElementById('myChart5'));
+				var category = this.KsData // 类别
+				var total = 100; // 数据总数
+				var datas = [];
+				category.forEach(value => {
+					datas.push(value.value);
+				});
+				option = {
+					title: {
+						text: 'KS distribution by item (Hrs)/KS时间分布图',
+						left: 'center',
+						y: '2', //垂
+						textStyle: { //主标题文本样式
+							fontSize: 20,
+							fontFamily: 'cursive',
+							color: "#37CC48"
+						}
+					},
+					xAxis: {
+						max: total,
+						splitLine: {
+							show: false
+						},
+						axisLine: {
+							show: false
+						},
+						axisLabel: {
+							show: false
+						},
+						axisTick: {
+							show: false
+						},
+					},
+					grid: {
+						left: '25%',
+						right: '15%',
+						top: '15%',
+						bottom: '0%',
+					},
+					yAxis: [{
+						type: "category",
+						inverse: false,
+						data: category,
+						axisLine: {
+							show: false
+						},
+						axisTick: {
+							show: false
+						},
+						axisLabel: {
+							show: false
+						},
+
+
+					}],
+					series: [{
+							// 内
+							type: "bar",
+							barWidth: 12,
+							silent: true,
+							itemStyle: {
+								normal: {
+									color: {
+										colorStops: [{
+												offset: 0,
+												color: '#00aa00', // 0% 处的颜色
+											},
+											{
+												offset: 1,
+												color: 'red', // 100% 处的颜色
+											},
+										],
+									},
+
+								},
+							},
+							label: {
+								normal: {
+									formatter: "{b}",
+									textStyle: {
+										color: "#fff",
+										fontSize: 15,
+										fontFamily: 'cursive',
+									},
+									position: 'left',
+									distance: 12, // 向右偏移位置
+									show: true
+								}
+							},
+							data: category,
+							z: 1,
+							animationEasing: "elasticOut"
+						},
+
+						{
+							// 分隔
+							type: "pictorialBar",
+							itemStyle: {
+								normal: {
+									color: "#07314a"
+								}
+							},
+							symbolRepeat: "fixed",
+							symbolMargin: 1.5,
+							symbol: "rect",
+							symbolClip: true,
+							symbolSize: [5, 15],
+							symbolPosition: "start",
+							symbolOffset: [3, -3],
+							symbolBoundingData: this.total,
+							data: [total, total, total, total, total, total, total],
+							z: 2,
+							animationEasing: "elasticOut",
+
+
+						},
+						{
+							// label
+							type: "pictorialBar",
+							symbolBoundingData: total,
+							itemStyle: {
+								normal: {
+									color: "none"
+								}
+							},
+							label: {
+								normal: {
+									formatter: (params) => {
+										var text;
+										text = '{f| ' + (params.data * 100 / total) + '%}';
+										return text;
+									},
+									rich: {
+										f: {
+											color: "#ffffff"
+										}
+									},
+									position: 'right',
+									distance: 20, // 向右偏移位置
+									show: true
+								}
+							},
+							data: datas,
+							z: 0,
+
+						},
+
+						{
+							name: "外框",
+							type: "bar",
+							barGap: "-130%", // 设置外框粗细
+							data: [total, total, total, total, total, total, total],
+							barWidth: 20,
+							itemStyle: {
+								normal: {
+									barBorderRadius: [5, 5, 5, 5, 5, 5, 5],
+									color: "transparent", // 填充色
+									barBorderColor: "#00aa00", // 边框色
+									barBorderWidth: 1, // 边框宽度
+								}
+							},
+							z: 0
+						},
+						{
+							type: 'scatter',
+							name: '条形',
+							symbol: 'roundRect',
+							symbolSize: [5, 10],
+							symbolOffset: [5, -3],
+							symbolKeepAspect: true,
+							itemStyle: {
+								normal: {
+									color: "#00aa00"
+								}
+							},
+							data: [total, total, total, total, total, total, total],
+						}
+
+					]
+				}
+
+				// 使用刚指定的配置项和数据显示图表。
+				myChart5.setOption(option);
+				window.onresize = function() {
+					myChart5.resize();
+				}
+			},
 
 			//IE时间分布图
 			myChart6() {
 				var myChart6 = echarts.init(document.getElementById('myChart6'));
-				var color = ["#55ffff", "#FFC0CB", "#FF69B4", "#DDA0DD", "#FF00FF", "#55aa00", "#ff0000", '#00ff00','#aa00ff','#0055ff']
+				var color = ["#55ffff", "#FFC0CB", "#FF69B4", "#DDA0DD", "#FF00FF", "#55aa00", "#ff0000", '#00ff00', '#aa00ff',
+					'#0055ff'
+				]
 				option = {
-					title: [
-						{
+					title: [{
 							text: 'IE distribution by item (Hrs)/IE 时间分布图',
 							left: 'center',
 							y: '2', //垂
@@ -1210,44 +1222,44 @@
 							}
 						},
 						{
-						  text: '<-' + 'KD=' + this.IeDataProKd + '%'+ '->',
-						  left:'14%',
-						  bottom: '30%',
-						  textStyle:{
-							  color:'#ffffff',
-					  　　　　 fontSize:15,
-					          fontFamily: 'cursive',
-						  }
-					  },
-					  {
-					  text: 'IE=' + this.IeDataProIe + '%',
-					  left:'48%',
-					  top: '12%',
-					  textStyle:{
-						  color:'#ffffff',
-　　　　                   fontSize:15,
-					      fontFamily: 'cursive',
-					  	 }
-					  },
-					  {
-						  text:'<--------' + '  KE= ' + this.IeDataProKe + '%  ' +'------->',
-						  left:'33%',
-						  bottom: '30%',
-						  textStyle:{
-							  color:'#ffffff',
-	  　　　　                 fontSize:15,
-							  fontFamily: 'cursive',
-							 }
-						  },
-						  {
-							  text: '<-' +'KS=' + this.IeDataProKs + '%' +'->',
-							  right:'9%',
-							  bottom: '30%',
-							  textStyle:{
-								  color:'#ffffff',
-	  　　　　                     fontSize:15,
-								  fontFamily: 'cursive',
-								 }
+							text: '<-' + 'KD=' + this.IeDataProKd + '%' + '->',
+							left: '14%',
+							bottom: '30%',
+							textStyle: {
+								color: '#ffffff',
+								fontSize: 15,
+								fontFamily: 'cursive',
+							}
+						},
+						{
+							text: 'IE=' + this.IeDataProIe + '%',
+							left: '48%',
+							top: '12%',
+							textStyle: {
+								color: '#ffffff',
+								fontSize: 15,
+								fontFamily: 'cursive',
+							}
+						},
+						{
+							text: '<--------' + '  KE= ' + this.IeDataProKe + '%  ' + '------->',
+							left: '33%',
+							bottom: '30%',
+							textStyle: {
+								color: '#ffffff',
+								fontSize: 15,
+								fontFamily: 'cursive',
+							}
+						},
+						{
+							text: '<-' + 'KS=' + this.IeDataProKs + '%' + '->',
+							right: '9%',
+							bottom: '30%',
+							textStyle: {
+								color: '#ffffff',
+								fontSize: 15,
+								fontFamily: 'cursive',
+							}
 						},
 					],
 					grid: {
@@ -1293,7 +1305,6 @@
 					},
 					series: [{
 							type: "bar",
-							type: "bar",
 							data: this.IeDataY,
 							stack: "zs",
 							barMaxWidth: "auto",
@@ -1320,10 +1331,9 @@
 						},
 
 						{
-							"type": "bar",
+							type: "bar",
 							data: this.IeDataY2,
 							stack: "zs",
-							type: "bar",
 							barMaxWidth: "auto",
 							barWidth: 20,
 							itemStyle: {
@@ -1335,7 +1345,7 @@
 											"#d48265",
 											"#91c7ae",
 											"#ca8622",
-											 "#ff0000", 
+											"#ff0000",
 											"#00aa00",
 											'#0055ff',
 											"#FFDE76",
@@ -1355,9 +1365,6 @@
 
 							},
 						},
-						
-
-
 					],
 				};
 
@@ -1402,7 +1409,7 @@
 						top: "30%",
 						containLabel: true
 					},
-					
+
 					xAxis: [{
 						type: 'category',
 						data: this.KeDataX,
@@ -1415,7 +1422,7 @@
 							textStyle: {
 								color: '#fff'
 							},
-					
+
 						},
 						axisLine: {
 							lineStyle: {
@@ -1424,7 +1431,7 @@
 							},
 						},
 					}],
-					
+
 					yAxis: [{
 							type: 'value',
 							name: "小时",
@@ -1447,13 +1454,13 @@
 									width: 1, //这里是为了突出显示加上的
 								}
 							},
-					
+
 							splitLine: { //网格线
 								show: false
 							}
-					
+
 						},
-					
+
 						{
 							type: 'value',
 							name: '100%',
@@ -1477,11 +1484,11 @@
 									width: 1, //这里是为了突出显示加上的
 								}
 							},
-					
+
 							splitLine: { //网格线
 								show: false
 							}
-					
+
 						},
 					],
 					series: [{
@@ -1571,7 +1578,7 @@
 				// 指定图表的配置项和数据
 				var option = {
 					title: {
-						text: '2021年趋势图',
+						text: this.dataOneBar.years +' IE & KE',
 						left: 'center',
 						y: '2', //垂
 						textStyle: { //主标题文本样式
@@ -1599,7 +1606,7 @@
 
 
 					legend: {
-						data: ['KE', 'IE', '目标KE', '目标IE'],
+						data: ['KE', 'IE', 'KE Target', 'IE Target'],
 						left: 'center',
 						y: '40px',
 						textStyle: { //图例文字的样式
@@ -1691,22 +1698,22 @@
 					],
 					series: [{
 							name: 'KE',
-							type: 'bar',
+							type: 'line',
 							data: this.dataOneBar.dataOneBar1
 						},
 						{
 							name: 'IE',
-							type: 'bar',
+							type: 'line',
 							data: this.dataOneBar.dataOneBar2
 						},
 						{
-							name: '目标KE',
+							name: 'KE Target',
 							type: 'line',
 							// yAxisIndex: 1,
 							data: this.dataOneBar.dataOneBar3
 						},
 						{
-							name: '目标IE',
+							name: 'IE Target',
 							type: 'line',
 							// yAxisIndex: 1,
 							data: this.dataOneBar.dataOneBar4
