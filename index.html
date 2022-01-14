@@ -150,8 +150,8 @@
 
 </html>
 <script type="text/javascript">
-	let url = "http://192.168.1.18:9100"
-	// let url = "http://10.177.34.15:23111"
+	let url = "http://10.177.34.15:23111"
+	// let url = "http://192.168.1.18:9100"
 	new Vue({
 		el: '#content',
 		data: {
@@ -187,11 +187,11 @@
 
 			dataOnePie: [{
 					value: 0,
-					name: 'Temp.正式工'
+					name: 'Perm.正式工'
 				},
 				{
-					value: 0,
-					name: 'Perm.小时工'
+					value: 1,
+					name: 'Temp.小时工'
 				},
 			],
 			dataTwoPie: [{
@@ -509,7 +509,7 @@
 								fontFamily: 'cursive',
 							},
 						}, {
-							text: '排班人数',
+							text: '当班排班人数',
 							left: '60%',
 							top: '50%',
 							textAlign: 'center',
@@ -886,7 +886,7 @@
 				// 指定图表的配置项和数据
 				var option = {
 					title: [{
-							text: `Temp/Perm`,
+							text: `Perm/Temp`,
 							left: 'center',
 							y: '2', //垂
 							textStyle: { //主标题文本样式
@@ -896,7 +896,7 @@
 							}
 						},
 						{
-							text: 'Ratio 小时工/正式工占比',
+							text: 'Ratio 正式工/小时工占比',
 							left: 'center',
 							y: '30', //垂
 							textStyle: { //主标题文本样式
@@ -906,7 +906,7 @@
 							},
 						}
 					],
-					color: ['#00aa00', '#CBCFD4'],
+					color: ['#00aa00', '#999999'],
 					tooltip: {
 						trigger: 'item',
 						formatter: "{a} <br/>{b} : {c}(H) / ({d}%)"
@@ -927,8 +927,8 @@
 					series: [{
 						name: '所占比例',
 						type: 'pie',
-						radius: '35%',
-						center: ["50%", "65%"],
+						radius: '30%',
+						center: ["50%", "70%"],
 						data: this.dataOnePie,
 						label: { //饼图图形上的文本标签
 							normal: {
@@ -938,7 +938,7 @@
 									fontSize: 13, //文字的字体大小
 									fontFamily: 'cursive',
 								},
-								formatter: '{b}:{c}(H)' + '\n' + ' ({d}%)',
+								formatter: '{b}:'+'\n'+'{c}(H)'+'\n'+'({d}%)',
 							}
 						}
 					}]
