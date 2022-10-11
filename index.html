@@ -150,8 +150,10 @@
 
 </html>
 <script type="text/javascript">
-	let url = "http://10.177.34.15:23111"
+	// let url = "http://10.177.34.15:23111"
 	// let url = "http://192.168.1.18:9100"
+	let url = "http://192.168.1.18:23111"
+	// let url = "http://192.168.1.125:23111"
 	new Vue({
 		el: '#content',
 		data: {
@@ -245,8 +247,6 @@
 					value: 100
 				},
 			],
-			// KsDataX: ['辅助检修', '领班', '车间培训员', '维修', 'QC检测员', 'IQC检测员', '仓库人员'],
-			// KsDataY: ['100', '200', '300', '400', '500', '300', '122'],
 
 			IeDataX: [
 				'Useful Time', 'Cyclic + Frequentia', 'Design Time', 'Operator Activeity', ' DVC Externalto process',
@@ -279,8 +279,6 @@
 
 		},
 		methods: {
-
-
 
 			//选择日期
 			changeData(val) {
@@ -372,6 +370,7 @@
 							self.dataThreeBar.dataThreeBarY = T5dataY;
 							//T1-T5比例图
 							let T6data = Array.from(res.data.list.T6).reduce((init, value, index) => {
+								
 								init.push({})
 								init[index].value = value.usetime
 								init[index].name = value.type
