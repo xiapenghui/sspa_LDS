@@ -30,22 +30,25 @@
 				<div class="search">
 					<el-row :gutter="20" type="flex" class="row-bg" justify="center">
 						<el-col :span="7">
-							<el-date-picker v-model="newDate" type="date" placeholder="请选择日期" @change="changeData" :picker-options="pickerOptions0"
-							 style="width: 100%;">
+							<el-date-picker v-model="newDate" type="date" placeholder="请选择日期" @change="changeData"
+								:picker-options="pickerOptions0" style="width: 100%;">
 							</el-date-picker>
 						</el-col>
 						<el-col :span="5">
 							<el-select v-model="newShift" placeholder="请选择班次" @change="changeShift">
-								<el-option v-for="item in optionsShift" :key="item.value" :label="item.label" :value="item.value"></el-option>
+								<el-option v-for="item in optionsShift" :key="item.value" :label="item.label"
+									:value="item.value"></el-option>
 							</el-select>
 						</el-col>
 						<el-col :span="6">
 							<el-select v-model="newLine" placeholder="请选择线体" @change="changeLine" clearable>
-								<el-option v-for="item in optionsLine" :key="item.value" :label="item.label" :value="item.value"></el-option>
+								<el-option v-for="item in optionsLine" :key="item.value" :label="item.label"
+									:value="item.value"></el-option>
 							</el-select>
 						</el-col>
 						<el-col :span="5" style="text-align: center;">
-							<el-button icon="el-icon-search" type="success" style="width: 100%" @click="search">点击查询</el-button>
+							<el-button icon="el-icon-search" type="success" style="width: 100%" @click="search">点击查询
+							</el-button>
 						</el-col>
 					</el-row>
 				</div>
@@ -61,11 +64,15 @@
 							<li v-for="(item,index) in tableData" :key="index">
 								<span class="mo30">{{item.linename}}</span>
 								<span class="mo30">
-									<el-tag type="danger" effect="dark" v-if='item.goodparts<item.targetparts'>{{item.goodparts}} </el-tag>
+									<el-tag type="danger" effect="dark" v-if='item.goodparts<item.targetparts'>
+										{{item.goodparts}}
+									</el-tag>
 									<b v-else>{{item.goodparts}} </b>
 								</span>
 								<span class="mo35">
-									<el-tag type="danger" effect="dark" v-if='item.ke<item.targetke'> {{(item.ke) + '%'}}</el-tag>
+									<el-tag type="danger" effect="dark" v-if='item.ke<item.targetke'>
+										{{(item.ke) + '%'}}
+									</el-tag>
 									<b v-else>{{(item.ke)+ '%'}} </b>
 								</span>
 							</li>
@@ -79,21 +86,16 @@
 			</div>
 
 			<div class="centerBox">
+				<div class="fiveBox">
+					<div class="mycharts" id="myChart5"></div>
+					<span class="border row1"></span>
+					<span class="border row2"></span>
+					<span class="border col1"></span>
+					<span class="border col2"></span>
+				</div>
+
 				<div class="fourBigBox">
-					<div class="fourBox">
-						<div class="mycharts" id="myChart1"></div>
-						<span class="border row1"></span>
-						<span class="border row2"></span>
-						<span class="border col1"></span>
-						<span class="border col2"></span>
-					</div>
-					<div class="fourBox">
-						<div class="mycharts" id="myChart2"></div>
-						<span class="border row1"></span>
-						<span class="border row2"></span>
-						<span class="border col1"></span>
-						<span class="border col2"></span>
-					</div>
+
 					<div class="fourBox">
 						<div class="mycharts" id="myChart3"></div>
 						<span class="border row1"></span>
@@ -108,15 +110,22 @@
 						<span class="border col1"></span>
 						<span class="border col2"></span>
 					</div>
-				</div>
-				<div class="fiveBox">
-					<div class="mycharts" id="myChart5"></div>
-					<span class="border row1"></span>
-					<span class="border row2"></span>
-					<span class="border col1"></span>
-					<span class="border col2"></span>
-				</div>
 
+					<div class="fourBox">
+						<div class="mycharts" id="myChart1"></div>
+						<span class="border row1"></span>
+						<span class="border row2"></span>
+						<span class="border col1"></span>
+						<span class="border col2"></span>
+					</div>
+					<div class="fourBox">
+						<div class="mycharts" id="myChart2"></div>
+						<span class="border row1"></span>
+						<span class="border row2"></span>
+						<span class="border col1"></span>
+						<span class="border col2"></span>
+					</div>
+				</div>
 
 			</div>
 
@@ -150,10 +159,8 @@
 
 </html>
 <script type="text/javascript">
-	// let url = "http://10.177.34.15:23111"
-	// let url = "http://192.168.1.18:9100"
-	let url = "http://192.168.1.18:23111"
-	// let url = "http://192.168.1.125:23111"
+	let url = "http://10.177.34.15:23111"
+	// let url = "http://192.168.1.216:9532"
 	new Vue({
 		el: '#content',
 		data: {
@@ -249,7 +256,8 @@
 			],
 
 			IeDataX: [
-				'Useful Time', 'Cyclic + Frequentia', 'Design Time', 'Operator Activeity', ' DVC Externalto process',
+				'Useful Time', 'Cyclic + Frequentia', 'Design Time', 'Operator Activeity',
+				' DVC Externalto process',
 				'Non Quality', 'Uncertaines', 'Operationg Time', 'DVC support', 'Time Spent'
 			],
 			IeDataY: [10, 23000, 10, 35000, 37000, 38000, 39000, 2000, 37000, 2000],
@@ -354,23 +362,27 @@
 							//表格
 							self.tableData = res.data.list.T1.length == 0 ? [] : res.data.list.T1;
 							//人数统计
-							self.peopleData = res.data.list.T2T3.length == 0 ? [] : Object.values(Array.from(res.data.list.T2T3)[0]).slice(
+							self.peopleData = res.data.list.T2T3.length == 0 ? [] : Object.values(
+								Array.from(res.data.list.T2T3)[0]).slice(
 								0, 3);
 							// //小时工和正式工
-							self.dataOnePie[0].value = Object.values(Array.from(res.data.list.T2T3)[0]).slice(3, 4);
-							self.dataOnePie[1].value = Object.values(Array.from(res.data.list.T2T3)[0]).slice(4, 5);
+							self.dataOnePie[0].value = Object.values(Array.from(res.data.list
+								.T2T3)[0]).slice(3, 4);
+							self.dataOnePie[1].value = Object.values(Array.from(res.data.list
+								.T2T3)[0]).slice(4, 5);
 							// 类型消耗时间
 							let T5dataX = []
 							let T5dataY = []
-							Array.from(res.data.list.T5).map(item => {
-								T5dataX.push(item.downtime)
-								T5dataY.push(item.usetime)
+							Array.from(res.data.list.T4).map(item => {
+								T5dataX.push(item.dttype)
+								T5dataY.push(item.ts)
 							});
 							self.dataThreeBar.dataThreeBarX = T5dataX;
 							self.dataThreeBar.dataThreeBarY = T5dataY;
 							//T1-T5比例图
-							let T6data = Array.from(res.data.list.T6).reduce((init, value, index) => {
-								
+							let T6data = Array.from(res.data.list.T6).reduce((init, value,
+								index) => {
+
 								init.push({})
 								init[index].value = value.usetime
 								init[index].name = value.type
@@ -380,21 +392,27 @@
 
 
 							//电池ks时间分布图
-							let T4data = Array.from(res.data.list.T4).reduce((init, value, index) => {
+							let T4data = Array.from(res.data.list.T5).reduce((init, value,
+								index) => {
 								init.push({})
-								init[index].value = value.ts
-								init[index].name = value.dttype
+								init[index].value = (value.usetime / value.plantime).toFixed(2) * 100
+								init[index].name = value.downtime
 								return init
 							}, [])
 							self.KsData = T4data
 
 							//IE时间分布
-							self.IeDataY2 = res.data.list.T7.length == 0 ? [] : (Object.values(Array.from(res.data.list.T7)[0])).map(
+							self.IeDataY2 = res.data.list.T7.length == 0 ? [] : (Object.values(
+								Array.from(res.data.list.T7)[0])).map(
 								item => parseInt(item)).slice(2, 12);
-							self.IeDataProKs = res.data.list.T7.length == 0 ? 0 : res.data.list.T7[0].ks;
-							self.IeDataProKe = res.data.list.T7.length == 0 ? 0 : res.data.list.T7[0].ke;
-							self.IeDataProIe = res.data.list.T7.length == 0 ? 0 : res.data.list.T7[0].ie;
-							self.IeDataProKd = res.data.list.T7.length == 0 ? 0 : res.data.list.T7[0].kd;
+							self.IeDataProKs = res.data.list.T7.length == 0 ? 0 : res.data.list.T7[
+								0].ks;
+							self.IeDataProKe = res.data.list.T7.length == 0 ? 0 : res.data.list.T7[
+								0].ke;
+							self.IeDataProIe = res.data.list.T7.length == 0 ? 0 : res.data.list.T7[
+								0].ie;
+							self.IeDataProKd = res.data.list.T7.length == 0 ? 0 : res.data.list.T7[
+								0].kd;
 							// ke时间分布
 							let T8dataX = []
 							let T8dataPar = []
@@ -763,7 +781,7 @@
 				// 指定图表的配置项和数据
 				var option = {
 					title: {
-						text: 'FG Output 成品产出',
+						text: 'KS时间分布图(Hrs)',
 						left: 'center',
 						y: '2', //垂
 						textStyle: { //主标题文本样式
@@ -773,8 +791,8 @@
 						}
 					},
 					grid: {
-						left: '10%',
-						right: '10%',
+						left: '5%',
+						right: '5%',
 						bottom: '-10%',
 						top: '15%',
 						containLabel: true
@@ -787,7 +805,8 @@
 						formatter: function(params) {
 							return params[0].name + '<br/>' +
 								"<span style='display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:rgba(36,207,233,0.9)'></span>" +
-								params[0].seriesName + ' : ' + Number((params[0].value).toFixed(2)).toLocaleString() +
+								params[0].seriesName + ' : ' + Number((params[0].value).toFixed(2))
+								.toLocaleString() +
 								' pcs<br/>'
 						}
 					},
@@ -802,7 +821,7 @@
 						axisLabel: {
 							show: true,
 							textStyle: {
-								fontSize: 14,
+								fontSize: 12,
 								color: '#fff',
 								fontFamily: 'cursive',
 							},
@@ -826,11 +845,11 @@
 						axisLabel: {
 							textStyle: {
 								color: '#ffffff',
-								fontSize: '13',
+								fontSize: '12',
 								fontFamily: 'cursive',
 							},
 							formatter: function(value) {
-								return value + ' pcs';
+								return value + '%';
 							},
 						},
 						data: this.dataThreeBar.dataThreeBarY
@@ -937,7 +956,7 @@
 									fontSize: 13, //文字的字体大小
 									fontFamily: 'cursive',
 								},
-								formatter: '{b}:'+'\n'+'{c}(H)'+'\n'+'({d}%)',
+								formatter: '{b}:' + '\n' + '{c}(H)' + '\n' + '({d}%)',
 							}
 						}
 					}]
@@ -1023,7 +1042,7 @@
 				});
 				option = {
 					title: {
-						text: 'KS distribution by item (Hrs)/KS时间分布图',
+						text: 'FG Output 成品产出',
 						left: 'center',
 						y: '2', //垂
 						textStyle: { //主标题文本样式
@@ -1048,7 +1067,7 @@
 						},
 					},
 					grid: {
-						left: '25%',
+						left: '20%',
 						right: '15%',
 						top: '15%',
 						bottom: '0%',
@@ -1124,7 +1143,7 @@
 							symbolPosition: "start",
 							symbolOffset: [3, -3],
 							symbolBoundingData: this.total,
-							data: [total, total, total, total, total, total, total],
+							data: [total, total, total, total, total, total],
 							z: 2,
 							animationEasing: "elasticOut",
 
@@ -1165,7 +1184,7 @@
 							name: "外框",
 							type: "bar",
 							barGap: "-130%", // 设置外框粗细
-							data: [total, total, total, total, total, total, total],
+							data: [total, total, total, total, total, total],
 							barWidth: 20,
 							itemStyle: {
 								normal: {
@@ -1189,7 +1208,7 @@
 									color: "#00aa00"
 								}
 							},
-							data: [total, total, total, total, total, total, total],
+							data: [total, total, total, total, total, total],
 						}
 
 					]
@@ -1205,7 +1224,8 @@
 			//IE时间分布图
 			myChart6() {
 				var myChart6 = echarts.init(document.getElementById('myChart6'));
-				var color = ["#55ffff", "#FFC0CB", "#FF69B4", "#DDA0DD", "#FF00FF", "#55aa00", "#ff0000", '#00ff00', '#aa00ff',
+				var color = ["#55ffff", "#FFC0CB", "#FF69B4", "#DDA0DD", "#FF00FF", "#55aa00", "#ff0000",
+					'#00ff00', '#aa00ff',
 					'#0055ff'
 				]
 				option = {
@@ -1403,7 +1423,7 @@
 					grid: {
 						left: "3%",
 						right: "3%",
-						bottom: "0%",
+						bottom: "2%",
 						top: "30%",
 						containLabel: true
 					},
@@ -1559,7 +1579,31 @@
 								}
 							},
 						}
-					]
+					],
+					dataZoom: [{
+							type: 'inside',
+							// filterMode: 'filter',
+							realtime: true,
+							start: 0,
+							end: 60
+						},
+						{
+							show: true,
+							xAxisIndex: [0],
+							realtime: true,
+							height: 6, //这里可以设置dataZoom的尺寸
+							bottom: '4%',
+							backgroundColor: 'green', // 填充颜色
+							textStyle: {
+								color: '#fff' // 左右两边文字颜色
+							},
+							borderColor: '#fff', // 组件边框的颜色
+							fillerColor: 'green', // 滑动的填充色
+							backgroundColor: '#fff' // 背景色
+						},
+
+					],
+
 				}
 
 				myChart7.setOption(option);
@@ -1761,7 +1805,8 @@
 				if (seconds >= 0 && seconds <= 9) {
 					seconds = "0" + seconds;
 				}
-				var currentdate = date.getFullYear() + "-" + month + "-" + strDate + " " + hours + ":" + minutes + ":" +
+				var currentdate = date.getFullYear() + "-" + month + "-" + strDate + " " + hours + ":" + minutes +
+					":" +
 					seconds;
 				return currentdate;
 			}
