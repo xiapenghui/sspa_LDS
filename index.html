@@ -159,8 +159,8 @@
 
 </html>
 <script type="text/javascript">
-	let url = "http://10.177.34.15:23111"
-	// let url = "http://192.168.1.216:9532"
+	// let url = "http://10.177.34.15:23111"
+	let url = "http://192.168.1.216:9532"
 	new Vue({
 		el: '#content',
 		data: {
@@ -395,7 +395,8 @@
 							let T4data = Array.from(res.data.list.T5).reduce((init, value,
 								index) => {
 								init.push({})
-								init[index].value = (value.usetime / value.plantime).toFixed(2) * 100
+							
+								init[index].value =parseInt(value.usetime / value.plantime.toFixed(2) *100)
 								init[index].name = value.downtime
 								return init
 							}, [])
