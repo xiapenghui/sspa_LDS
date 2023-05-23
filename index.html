@@ -271,6 +271,7 @@
 			],
 			KeDataPar: [20, 50, 80, 30, 53, 56, 75, 86, 43, 35, 78],
 			KeDataParLine: [10, 20, 30, 40, 53, 36, 72, 26, 33, 32, 28],
+			newAA: []
 		},
 		computed: {
 			optionHoverOther() {
@@ -399,9 +400,16 @@
 								init[index].value = parseInt(value.usetime / value.plantime
 									.toFixed(2) * 100)
 								init[index].name = value.downtime
+
+								init[index].usetime = value.usetime
 								return init
 							}, [])
+
+							res.data.list.T5.map(item => {
+								self.newAA.push(item.usetime)
+							})
 							self.KsData = T4data
+
 
 							//IE时间分布
 							self.IeDataY2 = res.data.list.T7.length == 0 ? [] : (Object.values(
@@ -1042,6 +1050,7 @@
 				category.forEach(value => {
 					datas.push(value.value);
 				});
+
 				option = {
 					title: {
 						text: 'FG Output 成品产出',
@@ -1070,6 +1079,7 @@
 					},
 					grid: {
 						left: '20%',
+						// right: '22%',
 						right: '15%',
 						top: '15%',
 						bottom: '0%',
@@ -1167,13 +1177,21 @@
 										text = '{f| ' + (params.data * 100 / total) + '%}';
 										return text;
 									},
+
+									//  formatter: (params, index) => {
+									//	var text;
+									//	text = '{f| '  + this.newAA[params.dataIndex] +'台'  + '    '   + (params.data * 100 /
+									//		total) + '%}';
+									//	return text;
+									// },
+
 									rich: {
 										f: {
 											color: "#ffffff"
 										}
 									},
 									position: 'right',
-									distance: 20, // 向右偏移位置
+									distance: 22, // 向右偏移位置
 									show: true
 								}
 							},
